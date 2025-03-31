@@ -16,12 +16,13 @@ pipeline {
             steps {
                 echo "🔧 Checking required files..."
                 sh '''
-                    test -f index.html || (echo "❌ Missing index.html" && exit 1)
-                    test -f netlify/functions/quote.js || (echo "❌ Missing quote function" && exit 1)
-                    echo "✅ Build check passed."
-                    npm install
-                    sudo npm install -g netlify-cli 
-                '''
+            test -f index.html || (echo "❌ Missing index.html" && exit 1)
+            test -f netlify/functions/quote.js || (echo "❌ Missing quote function" && exit 1)
+            echo "✅ Build check passed."
+            npm install
+            npm install netlify-cli  
+            npx netlify --version   
+            '''
             }
         }
 
