@@ -31,7 +31,7 @@ pipeline {
         stage('Deploy') {
             agent {
                 docker {
-                    image 'netlify/cli:latest'  # ใช้ Docker image ที่มี netlify-cli
+                    image 'netlify/cli:latest' 
                     reuseNode true
                 }
             }
