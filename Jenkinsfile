@@ -1,15 +1,16 @@
 pipeline {
     agent {
         docker {
-            image 'node:18-alpine'  // ใช้ Docker image ที่มี node และ npm ติดตั้ง
+            image 'node:18-alpine'
             reuseNode true
         }
-    
-        environment {
-            NETLIFY_SITE_ID = 'da0b64c5-659d-4916-92d2-6cac9cd4ad78'
-            NETLIFY_AUTH_TOKEN = credentials('netlify-token')
-        }
     }
+    
+    environment {
+        NETLIFY_SITE_ID = 'da0b64c5-659d-4916-92d2-6cac9cd4ad78'
+        NETLIFY_AUTH_TOKEN = credentials('netlify-token')
+    }
+    
     stages {
         stage('Build') {
             steps {
@@ -19,6 +20,7 @@ pipeline {
                     test -f netlify/functions/quote.js || (echo "❌ Missing quote function" && exit 1)
                     echo "✅ Build check passed."
                     npm install
+                    npm install -g netlify-cli  // ติดตั้ง Netlify CLI
                 '''
             }
         }
