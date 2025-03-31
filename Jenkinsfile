@@ -16,6 +16,7 @@ pipeline {
             }
             steps {
                 echo "🔧 Setting up environment..."
+                sh 'which npm || apk add --no-cache npm'  // ตรวจสอบว่า npm ติดตั้งแล้วหรือไม่
                 sh 'npm install netlify-cli'
             }
         }
@@ -35,7 +36,6 @@ pipeline {
             steps {
                 echo "🧪 Running function tests..."
                 sh '''
-                    # No need to install npm again in node:18-alpine
                     npm install
                     node -e "require('./netlify/functions/quote.js'); console.log('✅ Function loaded successfully')"
                 '''
