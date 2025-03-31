@@ -20,7 +20,7 @@ pipeline {
                     test -f netlify/functions/quote.js || (echo "❌ Missing quote function" && exit 1)
                     echo "✅ Build check passed."
                     npm install
-                    npm install -g netlify-cli  
+                    sudo npm install -g netlify-cli 
                 '''
             }
         }
