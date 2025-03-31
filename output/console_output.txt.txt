@@ -1,0 +1,210 @@
+Started by user asd
+Obtained Jenkinsfile from git https://github.com/Weds07/learn-jenkins-app.git
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/jenkins_home/workspace/itamio
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/jenkins_home/workspace/itamio/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/Weds07/learn-jenkins-app.git # timeout=10
+Fetching upstream changes from https://github.com/Weds07/learn-jenkins-app.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.39.5'
+ > git fetch --tags --force --progress -- https://github.com/Weds07/learn-jenkins-app.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision 3752bc725532a1b900f18c1f7e8b78194b244070 (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 3752bc725532a1b900f18c1f7e8b78194b244070 # timeout=10
+Commit message: "w"
+ > git rev-list --no-walk 49207b9d3a07d6bab0eb13ab7ea1b8fbbf745ed3 # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withCredentials
+Masking supported pattern matches of $NETLIFY_AUTH_TOKEN
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Build)
+[Pipeline] getContext
+[Pipeline] isUnix
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] sh
++ docker inspect -f . node:18-alpine
+.
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] withDockerContainer
+Jenkins seems to be running inside container 8891b6f1a65f6dbaa906cbd2d8be046b9a422cb129e2a6906032960851420e62
+but /var/jenkins_home/workspace/itamio could not be found among []
+but /var/jenkins_home/workspace/itamio@tmp could not be found among []
+$ docker run -t -d -u 1000:1000 -w /var/jenkins_home/workspace/itamio -v /var/jenkins_home/workspace/itamio:/var/jenkins_home/workspace/itamio:rw,z -v /var/jenkins_home/workspace/itamio@tmp:/var/jenkins_home/workspace/itamio@tmp:rw,z -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** node:18-alpine cat
+$ docker top 35d0732a183a1aac1032a331cb97d2abf9e030843c13adc070cc79cfd4fed8ce -eo pid,comm
+[Pipeline] {
+[Pipeline] echo
+🔧 Checking required files...
+[Pipeline] sh
++ test -f index.html
++ test -f netlify/functions/quote.js
++ echo '✅ Build check passed.'
+✅ Build check passed.
+[Pipeline] }
+$ docker stop --time=1 35d0732a183a1aac1032a331cb97d2abf9e030843c13adc070cc79cfd4fed8ce
+$ docker rm -f --volumes 35d0732a183a1aac1032a331cb97d2abf9e030843c13adc070cc79cfd4fed8ce
+[Pipeline] // withDockerContainer
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Test)
+[Pipeline] getContext
+[Pipeline] isUnix
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] sh
++ docker inspect -f . node:18-alpine
+.
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] withDockerContainer
+Jenkins seems to be running inside container 8891b6f1a65f6dbaa906cbd2d8be046b9a422cb129e2a6906032960851420e62
+but /var/jenkins_home/workspace/itamio could not be found among []
+but /var/jenkins_home/workspace/itamio@tmp could not be found among []
+$ docker run -t -d -u 1000:1000 -w /var/jenkins_home/workspace/itamio -v /var/jenkins_home/workspace/itamio:/var/jenkins_home/workspace/itamio:rw,z -v /var/jenkins_home/workspace/itamio@tmp:/var/jenkins_home/workspace/itamio@tmp:rw,z -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** node:18-alpine cat
+$ docker top 2b17571c030e92008036b2aeac4c86dafe0a43e14738395efd7ea598c5fad9e4 -eo pid,comm
+[Pipeline] {
+[Pipeline] echo
+🧪 Testing quote function load...
+[Pipeline] sh
++ node -e 'require('"'"'./netlify/functions/quote.js'"'"'); console.log('"'"'✅ Function loaded successfully'"'"')'
+✅ Function loaded successfully
+[Pipeline] }
+$ docker stop --time=1 2b17571c030e92008036b2aeac4c86dafe0a43e14738395efd7ea598c5fad9e4
+$ docker rm -f --volumes 2b17571c030e92008036b2aeac4c86dafe0a43e14738395efd7ea598c5fad9e4
+[Pipeline] // withDockerContainer
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploy)
+[Pipeline] getContext
+[Pipeline] isUnix
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] sh
++ docker inspect -f . node:18-alpine
+.
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] withDockerContainer
+Jenkins seems to be running inside container 8891b6f1a65f6dbaa906cbd2d8be046b9a422cb129e2a6906032960851420e62
+but /var/jenkins_home/workspace/itamio could not be found among []
+but /var/jenkins_home/workspace/itamio@tmp could not be found among []
+$ docker run -t -d -u 1000:1000 -w /var/jenkins_home/workspace/itamio -v /var/jenkins_home/workspace/itamio:/var/jenkins_home/workspace/itamio:rw,z -v /var/jenkins_home/workspace/itamio@tmp:/var/jenkins_home/workspace/itamio@tmp:rw,z -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** node:18-alpine cat
+$ docker top 027ae4d553d97152d097cadcd60264581ecac3b532644b4f2d078d727b11d9af -eo pid,comm
+[Pipeline] {
+[Pipeline] echo
+🚀 Deploying to Netlify...
+[Pipeline] sh
++ npm install netlify-cli
+npm warn deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+npm warn deprecated npmlog@5.0.1: This package is no longer supported.
+npm warn deprecated gauge@3.0.2: This package is no longer supported.
+npm warn deprecated are-we-there-yet@2.0.0: This package is no longer supported.
+npm warn deprecated glob@8.1.0: Glob versions prior to v9 are no longer supported
+
+changed 1596 packages, and audited 1666 packages in 2m
+
+257 packages are looking for funding
+  run `npm fund` for details
+
+14 vulnerabilities (3 low, 8 moderate, 3 high)
+
+To address all issues, run:
+  npm audit fix
+
+Run `npm audit` for details.
++ node_modules/.bin/netlify deploy '--auth=****' '--site=da0b64c5-659d-4916-92d2-6cac9cd4ad78' '--dir=.' --prod
+Deploy path:        /var/jenkins_home/workspace/itamio
+Functions path:     /var/jenkins_home/workspace/itamio/netlify/functions
+Configuration path: /var/jenkins_home/workspace/itamio/netlify.toml
+Deploying to main site URL...
+[33m⠋[39m Uploading blobs to deploy store...
+
+​
+Netlify Build                                                 
+────────────────────────────────────────────────────────────────
+​
+❯ Version
+  @netlify/build 30.0.6
+​
+❯ Flags
+  auth: ****
+  deployId: 67ea93ecb2c0ba26c019d2fc
+  dir: .
+  open: false
+  prod: true
+  prodIfUnlocked: false
+  site: da0b64c5-659d-4916-92d2-6cac9cd4ad78
+  skipFunctionsCache: false
+​
+❯ Current directory
+  /var/jenkins_home/workspace/itamio
+​
+❯ Config file
+  /var/jenkins_home/workspace/itamio/netlify.toml
+​
+❯ Context
+  dev
+[33m⠙[39m Finished uploading blobs to deploy store
+[33m⠋[39m Hashing files...
+[33m⠋[39m Looking for a functions cache...
+[33m⠙[39m No cached functions were found
+[33m⠙[39m Finished hashing 33 files and 1 functions
+[33m⠋[39m CDN diffing files...
+[33m⠙[39m CDN requesting 1 files and 0 functions
+[33m⠋[39m Uploading 1 files
+[33m⠙[39m Finished uploading 1 assets
+[33m⠋[39m Waiting for deploy to go live...
+[33m⠙[39m Deploy is live!
+
+Build logs:         https://app.netlify.com/sites/itamiov2/deploys/67ea93ecb2c0ba26c019d2fc
+Function logs:      https://app.netlify.com/sites/itamiov2/logs/functions
+Edge function Logs: https://app.netlify.com/sites/itamiov2/logs/edge-functions
+Unique deploy URL:  https://67ea93ecb2c0ba26c019d2fc--itamiov2.netlify.app
+Website URL:        https://itamiov2.netlify.app
+[Pipeline] }
+$ docker stop --time=1 027ae4d553d97152d097cadcd60264581ecac3b532644b4f2d078d727b11d9af
+$ docker rm -f --volumes 027ae4d553d97152d097cadcd60264581ecac3b532644b4f2d078d727b11d9af
+[Pipeline] // withDockerContainer
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Post Deploy)
+[Pipeline] echo
+✅ Deployment complete! Your app is live.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Declarative: Post Actions)
+[Pipeline] echo
+🎉 CI/CD pipeline finished successfully.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS

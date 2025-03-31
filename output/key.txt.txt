@@ -1,0 +1,2 @@
+NETLIFY_SITE_ID = 'da0b64c5-659d-4916-92d2-6cac9cd4ad78'
+NETLIFY_AUTH_TOKEN = credentials('netlify-token')
