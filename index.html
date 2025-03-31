@@ -1,22 +1,56 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8" />
-  <title>💬 คำคมสร้างแรงบันดาลใจ</title>
+  <meta charset="UTF-8">
+  <title>🚽 Skibidi Toilet</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #111;
+      color: white;
+    }
+    .container {
+      margin-top: 50px;
+    }
+    .skibidi {
+      font-size: 50px;
+      animation: dance 0.5s infinite alternate;
+      color: rgb(189, 24, 211);
+    }
+    @keyframes dance {
+      0% { transform: rotate(5deg); }
+      100% { transform: rotate(-5deg); }
+    }
+    .btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 18px;
+      background-color: #ff0;
+      border: none;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background-color: #fc0;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
-    <h1>☀️ คำคมประจำวัน</h1>
-    <p id="quote">คลิกปุ่มด้านล่างเพื่อรับแรงบันดาลใจใหม่ๆ</p>
-    <button onclick="getQuote()">✨ รับคำคม</button>
+    <h1>🚽 Skibidi Toilet 🎵</h1>
+    <p class="skibidi">🎶 Skibidi dop dop yes yes 🎶</p>
+    <button class="btn" onclick="playMusic()">▶ เล่นเพลง</button>
+    <audio id="music">
+      <source src="SHINRA TENSEI   Pain Destroys Konohagakure.mp3" type="audio/mpeg">
+      <source src="SHINRA TENSEI   Pain Destroys Konohagakure.ogg" type="audio/ogg">
+      Your browser does not support the audio element.
+    </audio>
   </div>
 
   <script>
-    async function getQuote() {
-      const res = await fetch('/.netlify/functions/quote');
-      const data = await res.json();
-      document.getElementById('quote').textContent = `“${data.quote}”`;
+    function playMusic() {
+      document.getElementById('music').play();
     }
   </script>
 </body>

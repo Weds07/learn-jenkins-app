@@ -35,6 +35,7 @@ pipeline {
             steps {
                 echo "🧪 Running function tests..."
                 sh '''
+                    apk add --no-cache nodejs npm
                     node -e "require('./netlify/functions/quote.js'); console.log('✅ Function loaded successfully')"
                 '''
             }
