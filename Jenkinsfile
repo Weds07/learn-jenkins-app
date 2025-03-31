@@ -35,7 +35,7 @@ pipeline {
             steps {
                 echo "🧪 Running function tests..."
                 sh '''
-                    apk add --no-cache nodejs npm
+                    npm install
                     node -e "require('./netlify/functions/quote.js'); console.log('✅ Function loaded successfully')"
                 '''
             }
@@ -52,6 +52,15 @@ pipeline {
                       --site=$NETLIFY_SITE_ID \
                       --dir=. \
                       --prod
+                '''
+            }
+        }
+
+        stage('Post Deploy') {
+            steps {
+                echo "🔍 Checking deployment status..."
+                sh '''
+                    node_modules/.bin/netlify status --auth=$NETLIFY_AUTH_TOKEN
                 '''
             }
         }
