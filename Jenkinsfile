@@ -1,8 +1,13 @@
 pipeline {
-    agent any
+    agent 
+        docker {
+            image 'node:18-alpine'  // ใช้ Docker image ที่มี node และ npm ติดตั้ง
+            reuseNode true
+        }
+    }
 
     environment {
-        NETLIFY_SITE_ID = '42dd4a42-af36-4c76-80fe-2ee8c85ccffe'
+        NETLIFY_SITE_ID = 'da0b64c5-659d-4916-92d2-6cac9cd4ad78'
         NETLIFY_AUTH_TOKEN = credentials('netlify-token')
     }
 
