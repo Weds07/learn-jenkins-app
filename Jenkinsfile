@@ -35,7 +35,7 @@ pipeline {
             steps {
                 echo "🧪 Running function tests..."
                 sh '''
-                    apk add --no-cache npm  # Ensure npm is installed in Alpine
+                    # No need to install npm again in node:18-alpine
                     npm install
                     node -e "require('./netlify/functions/quote.js'); console.log('✅ Function loaded successfully')"
                 '''
